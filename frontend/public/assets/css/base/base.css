@@ -1,0 +1,125 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+:root {
+	--black-light: #2c2c2c;
+	--button-hover: #626262;
+	--black-background: #1a1a1a;
+	--white-light: #c9cfd4;
+	--gray-background: #454545;
+	--purple: #d000ff;
+	--white-medium: #F1F1F1;
+	--container-background: #1a1a1a;
+	--shortcut-box: #2c2c2c;
+	--shortcut-box--suite: #176817;
+}
+
+* {
+	box-sizing: border-box;
+	font-family: 'Nunito', sans-serif;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background: var(--white-light);
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+	height: auto;
+	width: 100vw;
+	display: flex;
+}
+
+.main-background {
+	width: 100%;
+    height: 100vh;
+    background-color: var(--black-background);
+	padding: 10px 8%;
+	margin-left: 79px;
+}
+
+.main-container {
+	max-width: 100%;
+	margin: 0 auto;
+	background: var(--container-background);
+	border-radius: 15px;
+	box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.6);
+	overflow: hidden;
+	color: var(--white-medium);;
+	padding: 20px;
+	height: auto;
+}
+
+.flex-column-center {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+@media (max-width: 450px) {
+	.main-background {
+		width: 100%;
+		height: 100vh;
+		background-color: var(--black-background);
+		margin-left: 64px;
+		padding: 0px 8%;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
