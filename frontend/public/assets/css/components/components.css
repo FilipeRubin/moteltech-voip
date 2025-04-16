@@ -144,8 +144,16 @@
     align-items: start;
     padding: 10px;
     margin-bottom: 10px;
-}
+} 
 
+/* Modal */
+.modal {
+    display: none;
+    border: 1px solid rgb(201, 27, 27);
+    background-color: red;
+    width: 500px;
+    height: 500px;
+}
 
 @media (max-width: 391px) {
     .icon {
