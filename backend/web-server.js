@@ -12,7 +12,7 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = 12500;
-const publicDir = path.join(__dirname, '..', 'frontend');
+const publicDir = path.join(__dirname, '..', 'frontend/public');
 
 // Maps file extensions to Content-Type
 const mimeTypes = {
