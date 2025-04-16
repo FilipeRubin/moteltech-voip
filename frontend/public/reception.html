@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;500;700&display=swap">
+    <link rel="stylesheet" href="assets/css/backup/backup.css">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <title>Recepção</title>
+</head>
+<body>
+    <aside class="sidebar">
+        <nav class="sidebar__navigation">
+            <div class="item">
+                <ion-icon name="home-outline"></ion-icon>
+            </div>
+            <div class="item">
+                <ion-icon name="call"></ion-icon>
+            </div>
+            <div class="item">
+                <ion-icon name="bulb-outline"></ion-icon>
+            </div>
+            <div class="item">
+                <ion-icon name="snow-outline"></ion-icon>
+            </div>
+            <div class="item">
+                <ion-icon name="tv-outline"></ion-icon>
+            </div>
+            <div class="item">
+                <ion-icon name="volume-high-outline"></ion-icon>
+            </div>
+            <div class="item">
+                <ion-icon name="play-outline"></ion-icon>
+            </div>
+            <div class="item">
+                <ion-icon name="restaurant-outline"></ion-icon>
+            </div>
+            <div class="item">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </div>
+        </nav>
+    </aside>
+    <main class="content">
+        <div class="content__container">
+            <section class="content__generic content__profile">
+                <h2 class="content__profile--title">Moteltech</h2>
+                <h1 class="content__profile--subtitle">Medieval</h1>
+                <div class="content__profile--user">
+                    <img class="user__icon" src="assets/images/user-svgrepo-com.png">
+                    <p class="user__name">Recepção</p>
+                </div>
+            </section>
+            <section class="content__generic">
+                <div class="content__shortcut">
+                    <div class="shortcut__box shortcut__box--suite" id="suiteCard">
+                        <div class="shortcut__box--suite__container">
+                            <div class="shortcut__box--suite__identifier">
+                                <h1 class="suite__identifier--number suite__status--available">01</h1>
+                                <div class="suite__identifier--organizer">
+                                    <p class="suite__identifier--name">BLACK</p>
+                                    <div class="suite__devices">
+                                        <div class="suite__devices--door">
+                                            <img class="suite__devices--img" src="assets/images/door.png">
+                                        </div>
+                                        <div class="suite__devices--light">
+                                            <img class="suite__devices--img" src="assets/images/light-bulb-svgrepo-com.png">
+                                        </div>
+                                        <div class="suite__devices--air">
+                                            <img class="suite__devices--img" src="assets/images/wind-svgrepo-com.png">
+                                        </div>
+                                        <div class="suite__devices--plug">
+                                            <img class="suite__devices--img" src="assets/images/plug-svgrepo-com.png">
+                                        </div>
+                                        <div class="suite__devices--tv">
+                                            <img class="suite__devices--img" src="assets/images/tv-svgrepo-com.png">
+                                        </div>
+                                        <div class="suite__devices--music">
+                                            <img class="suite__devices--img" src="assets/images/music-note-svgrepo-com.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <dialog id="suiteModal">
+                        <div class="modal-content">
+                            <div class="close-btn" id="closeModal">✕</div>
+                    
+                            <div class="modal-suite">
+                                <div class="modal-suite__container">
+                                    <div class="modal-suite__identifier">
+                                        <h1 class="modal-suite__number suite__status--available">01</h1>
+                                        <div class="modal-suite__organizer">
+                                            <p class="modal-suite__name">BLACK</p>
+                                            <div class="modal-suite__devices">
+                                                <img class="modal-suite__devices--img" src="assets/images/door.png">
+                                                <img class="modal-suite__devices--img" src="assets/images/light-bulb-svgrepo-com.png">
+                                                <img class="modal-suite__devices--img" src="assets/images/wind-svgrepo-com.png">
+                                                <img class="modal-suite__devices--img" src="assets/images/plug-svgrepo-com.png">
+                                                <img class="modal-suite__devices--img" src="assets/images/tv-svgrepo-com.png">
+                                                <img class="modal-suite__devices--img" src="assets/images/music-note-svgrepo-com.png">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <div class="modal-buttons">
+                                <div class="modal-btn-container">
+                                    <div class="modal-btn">
+                                        <img class="modal__options--img" src="assets/images/status-svgrepo-com.png">
+                                    </div>
+                                    <p>Status</p>
+                                </div>
+                    
+                                <div class="modal-btn-container">
+                                    <div class="modal-btn">
+                                        <img class="modal__options--img" src="assets/images/amazon-alexa-icon-1024x1024-i3lm89q2.png">
+                                    </div>
+                                    <p>Recado da Alexa</p>
+                                </div>
+                    
+                                <div class="modal-btn-container">
+                                    <div class="modal-btn">
+                                        <img class="modal__options--img" src="assets/images/chat-bubble-dots-svgrepo-com.png">
+                                    </div>
+                                    <p>Chat</p>
+                                </div>
+                    
+                                <div class="modal-btn-container">
+                                    <div class="modal-btn">
+                                        <img class="modal__options--img" src="assets/images/phone-svgrepo-com.png">
+                                    </div>
+                                    <p>Ligação Voz</p>
+                                </div>
+
+                                <div class="modal-btn-container">
+                                    <div class="modal-btn">
+                                        <img class="modal__options--img" src="assets/images/menu-svgrepo-com.png">
+                                    </div>
+                                    <p>Cardápio</p>
+                                </div>
+
+                                <div class="modal-btn-container">
+                                    <div class="modal-btn">
+                                        <img class="modal__options--img" src="assets/images/management-svgrepo-com.png">
+                                    </div>
+                                    <p>Comandar Suíte</p>
+                            </div>
+                            </div>
+                        </div>
+                    </dialog>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="assets/scripts/suite-options.js"></script>
+</body>
+</html>
