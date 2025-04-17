@@ -97,7 +97,7 @@ function dispatchMessageObject(messageObject, senderUniqueId)
             receptionSocket = Users.getSocketByUniqueId(senderUniqueId);
         break;
     default:
-        sendMessage(destinationSocket, messageObject.data, messageObject.data);
+        sendMessage(destinationSocket, messageObject.type, messageObject.data);
         break;
     }
 }
