@@ -17,6 +17,9 @@ navigator.mediaDevices.getUserMedia({ audio: true })
 
 ws.addEventListener("open", async () => {
     console.log("Conectado ao WebSocket.");
+    const random = Math.random() < 0.5;
+    ws.send(JSON.stringify({type: 'registration', data: random ? 'suite' : 'reception'}));
+    console.log(random ? 'suite' : 'reception');
 });
 
 ws.onmessage = async event => {
