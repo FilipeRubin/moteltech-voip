@@ -1,5 +1,5 @@
-let serverIp = '192.168.15.24';
-let serverPort = '8080';
+let serverIp = '213.218.234.124';
+let serverPort = '12501';
 const address = `ws://${serverIp}:${serverPort}`;
 const socket = new WebSocket(address);
 
