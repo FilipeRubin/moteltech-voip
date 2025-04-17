@@ -1,20 +1,25 @@
-let serverIp = '192.168.15.24';
+let serverIp = '26.60.27.41';
 let serverPort = '8080';
 const address = `ws://${serverIp}:${serverPort}`;
-const socket = new WebSocket(address);
-
-const localAudio = document.getElementById("audioLocal");
-const remoteAudio = document.getElementById("audioRemoto");
+export const ws = new WebSocket(address);
+const localAudio = document.getElementById("localAudio");
+const remoteAudio = document.getElementById("remoteAudio");
 const peerConnection = new RTCPeerConnection();
 
 let isCaller = false;
 let pendingCandidates = [];
 
-socket.addEventListener("open", async () => {
+navigator.mediaDevices.getUserMedia({ audio: true })
+    .then(stream => {
+        localAudio.srcObject = stream;
+        stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
+    });
+
+ws.addEventListener("open", async () => {
     console.log("Conectado ao WebSocket.");
 });
 
-socket.onmessage = async event => {
+ws.onmessage = async event => {
     const data = JSON.parse(event.data);
     console.log("Mensagem recebida via WebSocket:", data);
 
@@ -30,7 +35,7 @@ socket.onmessage = async event => {
         if (data.sdp.type === 'offer') {
             const answer = await peerConnection.createAnswer();
             await peerConnection.setLocalDescription(answer);
-            socket.send(JSON.stringify({ sdp: answer }));
+            ws.send(JSON.stringify({ sdp: answer }));
         }
     } else if (data.candidate) {
         console.log("Recebido ICE Candidate:", data.candidate);
@@ -42,7 +47,11 @@ socket.onmessage = async event => {
         }
     }
 
-    if (data.type === "call-accepted") {
+    if (data.type === "call-request") {
+        openModal('modalteste');
+    }
+
+    else if (data.type === "call-accepted") {
         startCall();
     }
 };
@@ -50,7 +59,7 @@ socket.onmessage = async event => {
 peerConnection.onicecandidate = event => {
     if (event.candidate) {
         console.log("Enviando ICE Candidate:", event.candidate);
-        socket.send(JSON.stringify({ candidate: event.candidate, target_ip: suiteIp }));
+        ws.send(JSON.stringify({ candidate: event.candidate}));
     }
 };
 
@@ -61,37 +70,19 @@ peerConnection.ontrack = event => {
     }
 };
 
-function listenEvents() {
-    const callToReceptionButton = document.querySelector("#btn--call-to-reception");
-  
-    callToReceptionButton.addEventListener("click",() => {
-      openModal("modalteste");
-      getUserMedia();
-      startCall();
-    });
-}
-
 function startCall() {
     isCaller = true;
     peerConnection.createOffer().then(offer => {
         peerConnection.setLocalDescription(offer);
-        socket.send(JSON.stringify({ type: "offer", sdp: offer }));
+        ws.send(JSON.stringify({ sdp: offer }));
     });
 }
 
-function getUserMedia(){
-    navigator.mediaDevices.getUserMedia({ audio: true })
-    .then(stream => {
-        localAudio.srcObject = stream;
-        stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
-    });
-}
 
 function openModal(modalId){
     if(document.getElementById(modalId)){
         let modal = document.getElementById(modalId);
         modal.style.display = "flex";
     }
-  }
+}
 
-document.addEventListener("DOMContentLoaded", listenEvents);

@@ -14,7 +14,7 @@
     <title>Suíte</title>
 </head>
 <body>
-    <audio id="localAudio" autoplay></audio>
+    <audio id="localAudio" autoplay muted></audio>
     <audio id="remoteAudio" autoplay></audio>
     <aside class="sidebar flex-column-center">
         <nav class="sidebar__nav flex-column-center">
@@ -94,12 +94,13 @@
             </section>
         </div>
     </main>
-
     <div class="modal modal__call" id="modalteste">
-        <p class="modal__call--status">Chamando</p>
-        <button>Desligar</button>
+        <div class="modal__container">
+            <p class="modal__call--status">Chamando</p>
+            <button>Desligar</button>
+        </div>
     </div>
-    <script type="module" src="assets/scripts/websocket-connection.js"></script>
-    <script type="module" src="assets/scripts/event-listener-suite.js"></script>
+    <script type="module" src="../public/assets/scripts/antigo.js"></script>
+    <script type="module" src="../public/assets/scripts/suite.js"></script>
 </body>
 </html>

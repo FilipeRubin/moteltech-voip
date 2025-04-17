@@ -148,11 +148,21 @@
 
 /* Modal */
 .modal {
-    display: none;
-    border: 1px solid rgb(201, 27, 27);
-    background-color: red;
-    width: 500px;
-    height: 500px;
+    display: none; /* Começa invisível */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Escurece fundo */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal__container {
+    background-color: aqua;
+    padding: 50px;
 }
 
 @media (max-width: 391px) {
