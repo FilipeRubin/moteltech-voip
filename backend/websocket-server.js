@@ -1,9 +1,8 @@
 const WebSocket = require('ws');
 const Users = require('./users');
-const webSocketServer = new WebSocket.Server({host: '0.0.0.0', port: 12501});
+const webSocketServer = new WebSocket.Server({ port: 12501 });
 
-class MessageObject
-{
+class MessageObject {
     /**
      * 
      * @param {string} type
@@ -24,14 +23,13 @@ webSocketServer.on('connection', (clientSocket, request) => {
 
     clientSocket.on('message', (message) => {
         const messageObject = translateMessage(message.toString());
-        if (messageObject != null)
-        {
+        if (messageObject != null) {
             dispatchMessageObject(messageObject, userObject.uniqueId);
         }
     });
 
     clientSocket.on('close', () => {
-        console.log(`[${userObject.uniqueId}] disconnected to server.`);
+        console.log(`[${userObject.uniqueId}] disconnected from server.`);
         Users.unregisterUser(userObject);
     });
 });
@@ -42,20 +40,17 @@ webSocketServer.on('connection', (clientSocket, request) => {
  * @param {string} type 
  * @param {any} data
  */
-function sendMessage(clientSocket, type, data)
-{
+function sendMessage(clientSocket, type, data) {
     const messageObject = new MessageObject(type, data);
     const messageString = JSON.stringify(messageObject);
-    if (clientSocket != undefined)
-    {
+    if (clientSocket !== undefined) {
         clientSocket.send(messageString);
     }
 }
 
-function sendMessageToAllExcept(excpetion, type, data)
-{
+function sendMessageToAllExcept(exception, type, data) {
     Users.getUsersSockets().forEach((socket) => {
-        if (excpetion != socket)
+        if (exception !== socket)
             sendMessage(socket, type, data);
     });
 }
@@ -65,21 +60,16 @@ function sendMessageToAllExcept(excpetion, type, data)
  * @param {string} message 
  * @returns {object|null}
  */
-function translateMessage(message)
-{
-    try
-    {
+function translateMessage(message) {
+    try {
         const messageObject = JSON.parse(message);
 
-        if (messageObject.type === undefined || messageObject.data === undefined)
-        {
+        if (messageObject.type === undefined || messageObject.data === undefined) {
             return null;
         }
 
         return messageObject;
-    }
-    catch (error)
-    {
+    } catch (error) {
         console.error(`Failed to parse message: ${error}\nMessage text: ${message}`);
         return null;
     }
@@ -90,22 +80,22 @@ function translateMessage(message)
  * @param {MessageObject} messageObject 
  * @param {number} senderUniqueId
  */
-function dispatchMessageObject(messageObject, senderUniqueId)
-{
+function dispatchMessageObject(messageObject, senderUniqueId) {
     console.log(`[${senderUniqueId}] ${messageObject.type}: ${String(messageObject.data).slice(0, 20)}`);
     
-    const destinationSocket = Users.getSocketByUniqueId(senderUniqueId) == suiteSocket ? receptionSocket : suiteSocket;
+    const senderSocket = Users.getSocketByUniqueId(senderUniqueId);
+    const destinationSocket = senderSocket === suiteSocket ? receptionSocket : suiteSocket;
 
-    switch (messageObject.type)
-    {
-    case 'registration':
-        if (messageObject.data === 'suite')
-            suiteSocket = Users.getSocketByUniqueId(senderUniqueId);
-        else if (messageObject.data === 'reception')
-            receptionSocket = Users.getSocketByUniqueId(senderUniqueId);
-        break;
-    default:
-        sendMessageToAllExcept(Users.getSocketByUniqueId(senderUniqueId), messageObject.type, messageObject.data);
-        break;
+    switch (messageObject.type) {
+        case 'registration':
+            if (messageObject.data === 'suite') {
+                suiteSocket = senderSocket;
+            } else if (messageObject.data === 'reception') {
+                receptionSocket = senderSocket;
+            }
+            break;
+        default:
+            sendMessageToAllExcept(senderSocket, messageObject.type, messageObject.data);
+            break;
     }
 }
