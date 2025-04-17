@@ -19,8 +19,8 @@ let suiteSocket = null;
 let receptionSocket = null;
 
 webSocketServer.on('connection', (clientSocket, request) => {
-    console.log(`Client ${request.socket.remoteAddress} connected to server.`);
     const userObject = Users.registerUser(clientSocket);
+    console.log(`[${userObject.uniqueId}] connected to server.`);
 
     clientSocket.on('message', (message) => {
         const messageObject = translateMessage(message.toString());
@@ -31,7 +31,7 @@ webSocketServer.on('connection', (clientSocket, request) => {
     });
 
     clientSocket.on('close', () => {
-        console.log(`Client ${request.socket.remoteAddress} disconnected to server.`);
+        console.log(`[${userObject.uniqueId}] disconnected to server.`);
         Users.unregisterUser(userObject);
     });
 });

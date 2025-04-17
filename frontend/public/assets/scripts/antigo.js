@@ -85,4 +85,3 @@ function openModal(modalId){
         modal.style.display = "flex";
     }
 }
-
