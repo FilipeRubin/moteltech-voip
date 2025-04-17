@@ -61,11 +61,11 @@ ws.onmessage = async event => {
         }
     }
 
-    if (data.type === "call-request") {
+    else if (type === "call-request") {
         openModal('modalteste');
     }
 
-    else if (data.type === "call-accepted") {
+    else if (type === "call-accepted") {
         startCall();
     }
 };
