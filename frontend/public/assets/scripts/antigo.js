@@ -23,24 +23,34 @@ ws.addEventListener("open", async () => {
 });
 
 ws.onmessage = async event => {
-    const data = JSON.parse(event.data);
+    const type = event.data.type;
+    const data = JSON.parse(event.data.data);
     console.log("Mensagem recebida via WebSocket:", data);
 
-    if (data.sdp) {
-        console.log("Recebido SDP:", data.sdp);
-        await peerConnection.setRemoteDescription(new RTCSessionDescription(data.sdp));
+    if (type === 'offer') {
+        console.log("Recebido SDP:", data);
+        await peerConnection.setRemoteDescription(new RTCSessionDescription(data));
 
         pendingCandidates.forEach(async candidate => {
             await peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
         });
         pendingCandidates = [];
 
-        if (data.sdp.type === 'offer') {
-            const answer = await peerConnection.createAnswer();
-            await peerConnection.setLocalDescription(answer);
-            ws.send(JSON.stringify({ sdp: answer }));
-        }
-    } else if (data.candidate) {
+        const answer = await peerConnection.createAnswer();
+        await peerConnection.setLocalDescription(answer);
+        ws.send(JSON.stringify({ type: 'answer', data: answer }));
+    }
+    else if (type === 'answer')
+    {
+        console.log("Recebido SDP:", data);
+        await peerConnection.setRemoteDescription(new RTCSessionDescription(data));
+
+        pendingCandidates.forEach(async candidate => {
+            await peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+        });
+        pendingCandidates = [];
+    }
+    else if (type === `candidate`) {
         console.log("Recebido ICE Candidate:", data.candidate);
         if (peerConnection.remoteDescription) {
             await peerConnection.addIceCandidate(new RTCIceCandidate(data.candidate));
@@ -62,7 +72,7 @@ ws.onmessage = async event => {
 peerConnection.onicecandidate = event => {
     if (event.candidate) {
         console.log("Enviando ICE Candidate:", event.candidate);
-        ws.send(JSON.stringify({ candidate: event.candidate}));
+        ws.send(JSON.stringify({ type: 'candidate', data: event.candidate}));
     }
 };
 
@@ -77,7 +87,7 @@ function startCall() {
     isCaller = true;
     peerConnection.createOffer().then(offer => {
         peerConnection.setLocalDescription(offer);
-        ws.send(JSON.stringify({ sdp: offer }));
+        ws.send(JSON.stringify({ type: 'offer', data: offer }));
     });
 }
 
