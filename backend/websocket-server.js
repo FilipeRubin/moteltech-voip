@@ -52,6 +52,14 @@ function sendMessage(clientSocket, type, data)
     }
 }
 
+function sendMessageToAllExcept(excpetion, type, data)
+{
+    Users.getUsersSockets().forEach((socket) => {
+        if (excpetion != socket)
+            sendMessage(socket, type, data);
+    });
+}
+
 /**
  * 
  * @param {string} message 
@@ -97,7 +105,7 @@ function dispatchMessageObject(messageObject, senderUniqueId)
             receptionSocket = Users.getSocketByUniqueId(senderUniqueId);
         break;
     default:
-        sendMessage(destinationSocket, messageObject.type, messageObject.data);
+        sendMessageToAllExcept(Users.getSocketByUniqueId(senderUniqueId), messageObject.type, messageObject.data);
         break;
     }
 }

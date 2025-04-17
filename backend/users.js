@@ -70,4 +70,9 @@ function getSocketByUniqueId(uniqueId)
     return usersSockets.get(user) || null;
 }
 
-module.exports = {registerUser, unregisterUser, getUserByUniqueId, getSocketByUniqueId};
+function getUsersSockets()
+{
+    return usersSockets;
+}
+
+module.exports = {registerUser, unregisterUser, getUserByUniqueId, getSocketByUniqueId, getUsersSockets};
