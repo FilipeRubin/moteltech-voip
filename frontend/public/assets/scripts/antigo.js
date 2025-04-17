@@ -23,8 +23,9 @@ ws.addEventListener("open", async () => {
 });
 
 ws.onmessage = async event => {
-    const type = event.data.type;
-    const data = JSON.parse(event.data.data);
+    const messageObject = JSON.parse(event.data);
+    const type = messageObject.type;
+    const data = messageObject.data;
     console.log("Mensagem recebida via WebSocket:", data);
 
     if (type === 'offer') {
