@@ -52,12 +52,12 @@ ws.onmessage = async event => {
         pendingCandidates = [];
     }
     else if (type === `candidate`) {
-        console.log("Recebido ICE Candidate:", data.candidate);
+        console.log("Recebido ICE Candidate:", data);
         if (peerConnection.remoteDescription) {
-            await peerConnection.addIceCandidate(new RTCIceCandidate(data.candidate));
+            await peerConnection.addIceCandidate(new RTCIceCandidate(data));
         } else {
             console.warn("Armazenando ICE Candidate antes do setRemoteDescription");
-            pendingCandidates.push(data.candidate);
+            pendingCandidates.push(data);
         }
     }
 
